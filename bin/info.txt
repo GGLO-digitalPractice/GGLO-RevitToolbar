@@ -1,0 +1,1 @@
+Contains all the source files and icons used by the toolbar
