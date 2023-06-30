@@ -13,6 +13,6 @@ Install pyRevit from https://github.com/eirannejad/pyRevit/releases
 WIN+R, then type 'cmd'
 In the command line, install the extension with the following command:
 *****************
-pyrevit extend ui GGLO-Toolbar https://github.com/sburkeGGLO/GGLO-Toolbar.git --dest="C:\\_GGLO\RevitTools" --branch=main
+pyrevit extend ui GGLO-Toolbar https://github.com/GGLO-digitalPractice/GGLO-RevitToolbar.git --dest="C:\\_GGLO\RevitTools" --branch=main
 ***************** 
   If Revit was opened, use the reload button of pyRevit
