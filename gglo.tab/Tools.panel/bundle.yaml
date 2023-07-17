@@ -2,6 +2,5 @@ layout:
   - Preselect_byCategory
   - CopyKeynotes
   - ImportWalls
-  - SetCoordinates
-
+  - GroupWalls
 title: Tools
