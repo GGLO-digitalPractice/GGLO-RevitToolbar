@@ -1,0 +1,286 @@
+{
+   "omniclass": {
+      "level1": [
+         {
+            "extraAttributes": {
+               "_definitions": "Amounts of space establish for development of design scenarios",
+               "_discussion": "",
+               "_mapPrevious": "",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-11%2000%2000"
+            },
+            "_number": "13-11 00 00",
+            "_title": "Space Planning Types"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "A space inside the building where floor structure might otherwise be expected. The lowest floor of a multi-story void is classified based on the utilization at that level.",
+               "_discussion": "",
+               "_mapPrevious": "",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-13%2000%2000"
+            },
+            "_number": "13-13 00 00",
+            "_title": "Void Areas"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "The space taken up by any of various permanent upright constructions having a length much greater than the thickness and presenting a continuous surface except where pierced by doors, windows, etc.: used for shelter, protection, or privacy, or to sub",
+               "_discussion": "",
+               "_mapPrevious": "",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-15%2000%2000"
+            },
+            "_number": "13-15 00 00",
+            "_title": "Wall Spaces"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "The space associated with base building elements that prevent the use of the space for furniture, equipment, circulation, or other occupant function.",
+               "_discussion": "",
+               "_mapPrevious": "",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-17%2000%2000"
+            },
+            "_number": "13-17 00 00",
+            "_title": "Encroachment Spaces"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "Spaces used to circulate and station vehicles.",
+               "_discussion": "",
+               "_mapPrevious": "",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-21%2000%2000"
+            },
+            "_number": "13-21 00 00",
+            "_title": "Parking Spaces"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "portion of a building  that provides services that enable occupants to work in a building",
+               "_discussion": "",
+               "_mapPrevious": "13-81 00 00",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-23%2000%2000"
+            },
+            "_number": "13-23 00 00",
+            "_title": "Facility Service Spaces"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "Spaces for circulation that provide or control access to and between other spaces within the facility, entry, and egress.",
+               "_discussion": "",
+               "_mapPrevious": "13-85 00 00",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-25%2000%2000"
+            },
+            "_number": "13-25 00 00",
+            "_title": "Circulation Spaces"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "Space used for education.",
+               "_discussion": "",
+               "_mapPrevious": "",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-31%2000%2000"
+            },
+            "_number": "13-31 00 00",
+            "_title": "Education and Training Spaces"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "A space for any leisure activity, such as play, that diverts, amuses or stimulates.",
+               "_discussion": "",
+               "_mapPrevious": "13-31 00 00",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-33%2000%2000"
+            },
+            "_number": "13-33 00 00",
+            "_title": "Recreation Spaces"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "A place provided for general public access and use. ",
+               "_discussion": "",
+               "_mapPrevious": "13-11 00 00",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-35%2000%2000"
+            },
+            "_number": "13-35 00 00",
+            "_title": "Government Spaces"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "",
+               "_discussion": "",
+               "_mapPrevious": "",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-37%2000%2000"
+            },
+            "_number": "13-37 00 00",
+            "_title": "Artistic Spaces"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "",
+               "_discussion": "",
+               "_mapPrevious": "",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-41%2000%2000"
+            },
+            "_number": "13-41 00 00",
+            "_title": "Museum Spaces"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "",
+               "_discussion": "",
+               "_mapPrevious": "",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-45%2000%2000"
+            },
+            "_number": "13-45 00 00",
+            "_title": "Library Spaces"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "Space designated for the practice of religion or meditation .",
+               "_discussion": "",
+               "_mapPrevious": "13-61 11 00",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-47%2000%2000"
+            },
+            "_number": "13-47 00 00",
+            "_title": "Spiritual Spaces"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "Space with environments where such variables as humidity, temperature, pressure, sound, contamination are tightly controlled.  These Spaces may be part of the research or production processes.",
+               "_discussion": "",
+               "_mapPrevious": "",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-49%2000%2000"
+            },
+            "_number": "13-49 00 00",
+            "_title": "Environmentally Controlled Spaces"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "Space which is used for services directly related to the heath care and medical practice. Most uses are applicable to providing medical care to humans as well as veterinarian services for animals. Size of the space may vary according to the size of t",
+               "_discussion": "",
+               "_mapPrevious": "13-41 41 00",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-51%2000%2000"
+            },
+            "_number": "13-51 00 00",
+            "_title": "Healthcare Spaces"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "Space that has built-in equipment, plumbing, and/or utilities for the qualitative and/or quantitative analysis of matter, experimentation, or the processing of materials, including wet and clean laboratories.",
+               "_discussion": "",
+               "_mapPrevious": "",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-53%2000%2000"
+            },
+            "_number": "13-53 00 00",
+            "_title": "Laboratory Spaces"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "Spaces where customers or clients view, sample, purchase and return product or where business, clerical or professional activities are conducted",
+               "_discussion": "",
+               "_mapPrevious": "13-25 00 00",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-55%2000%2000"
+            },
+            "_number": "13-55 00 00",
+            "_title": "Commerce Activity Spaces"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "Space for conducting commercial activities and those in support of personal needs.",
+               "_discussion": "",
+               "_mapPrevious": "",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-57%2000%2000"
+            },
+            "_number": "13-57 00 00",
+            "_title": "Service Activity Spaces"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "Spaces where manufactured items are created or maintained. ",
+               "_discussion": "",
+               "_mapPrevious": "13-15 21 11",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-59%2000%2000"
+            },
+            "_number": "13-59 00 00",
+            "_title": "Production, Fabrication, and Maintenance Spaces"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "Spaces to provide shelter or keep someone safe from harm or discomfort.",
+               "_discussion": "",
+               "_mapPrevious": "13-65 00 00",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-61%2000%2000"
+            },
+            "_number": "13-61 00 00",
+            "_title": "Protective Spaces"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "",
+               "_discussion": "",
+               "_mapPrevious": "13-75 00 00",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-63%2000%2000"
+            },
+            "_number": "13-63 00 00",
+            "_title": "Storage Spaces"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "Space used to provide accommodation for people when not at work. The accommodation provides facilities for sleeping and relaxation and usually cooking, eating, cleaning,  ",
+               "_discussion": "",
+               "_mapPrevious": "",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-65%2000%2000"
+            },
+            "_number": "13-65 00 00",
+            "_title": "Private Residential Spaces"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "Space that is used to accommodate employees during the workday but which are not part of the institution's real estate portfolio. ",
+               "_discussion": "",
+               "_mapPrevious": "",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-67%2000%2000"
+            },
+            "_number": "13-67 00 00",
+            "_title": "Alternate Workplace"
+         },
+         {
+            "extraAttributes": {
+               "_definitions": "",
+               "_discussion": "",
+               "_mapPrevious": "",
+               "_mapNext": "",
+               "_uriClass": "http://bim-cloud.com/rest/omniclass/2/13/13-69%2000%2000"
+            },
+            "_number": "13-69 00 00",
+            "_title": "Building Associated Spaces "
+         }
+      ],
+      "_xmlns": "http://www.bim-cloud.com/xsd/001",
+      "_xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+      "_xsi:schemaLocation": "http://www.bim-cloud.com/xsd/001 http://bim-cloud.com/xsd/001/omniclass-001.xsd",
+      "_versionID": "2",
+      "_table": "13"
+   }
+}
