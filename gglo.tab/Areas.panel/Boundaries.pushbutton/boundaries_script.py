@@ -30,6 +30,10 @@ walls = collector.OfCategory(BuiltInCategory.OST_Walls).WhereElementIsNotElement
 # Start the transaction
 t = Transaction(doc, 'Create area boundaries from walls')
 t.Start()
+
+# Initialize a counter for the number of lines created
+num_lines_created = 0
+
 try:
     wall_groups = wall_utils.group_walls(walls)
     
@@ -38,14 +42,16 @@ try:
     
     # Then pass the flattened list to your function
     exterior_lines = wall_utils.get_wall_exterior_lines(wall_groups_elements)
-    
+    print(exterior_lines)
     # Create a new Area Boundary based on the exterior line
     for group_lines in exterior_lines:
         for exterior_line in group_lines:
             doc.Create.NewAreaBoundaryLine(current_view.SketchPlane, exterior_line, current_view)
+            num_lines_created += 1
 
 except Exception as e:
     logging.error("Exception occurred", exc_info=True)
     t.RollBack()
 else:
     t.Commit()
+    print("\nSuccess! Created {} Area Boundary Lines.".format(num_lines_created))

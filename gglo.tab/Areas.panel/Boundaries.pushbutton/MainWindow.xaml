@@ -1,0 +1,12 @@
+<!-- MainWindow.xaml -->
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Login System" Height="350" Width="500">
+    <Grid>
+        <Label Content="Login System" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0"/>
+        <TextBox Name="Username" Width="120" Height="23" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,40,0,0" Text="Username"/>
+        <PasswordBox Name="Password" Width="120" Height="23" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,70,0,0" />
+        <Button Name="LoginButton" Content="Login" Width="120" Height="23" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0"/>
+        <CheckBox Content="Remember Me" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,130,0,0"/>
+    </Grid>
+</Window>

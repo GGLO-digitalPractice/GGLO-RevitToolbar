@@ -15,6 +15,10 @@ blue = Color(0,128,255)  # Color is defined with RGB values
 red = Color(128,0,0)
 npb = Color(164, 221, 237)
 
+# Annotation Family Label Inputs
+font = "Times New Roman"  # The font to be set
+color = blue
+
 # Set up the category seearch term / color combinations
 search_terms_colors = [
     (["Revision"], red),  # Red
@@ -32,8 +36,8 @@ try:
     
     # If successful, commit the transaction
     t.Commit()
+    print("Annotation Categories' colors have been successfully updated")
 except Exception as ex:
     # If there is any error, roll back the transaction
     print("Error: ", ex)
     t.RollBack()
-
