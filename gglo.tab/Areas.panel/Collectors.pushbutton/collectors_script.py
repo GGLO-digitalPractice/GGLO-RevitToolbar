@@ -3,6 +3,7 @@
 # Standard library imports
 from System import Enum
 from System.Collections.Generic import List
+from collections import defaultdict
 import logging
 
 # Revit imports
@@ -32,8 +33,8 @@ current_view = uidoc.ActiveView
 collector = FilteredElementCollector(doc, current_view.Id)
 
 # Start the transaction
-t = Transaction(doc, 'Create area boundaries from walls')
-t.Start()
+# t = Transaction(doc, 'Create area boundaries from walls')
+# t.Start()
 
 # Initialize a counter for the number of lines created
 num_lines_created = 0
@@ -70,38 +71,59 @@ area_scheme_names = []
 for area_scheme in area_schemes:
     area_scheme_names.append(area_scheme.Name)
 
-# Sort levels by elevation
-levels = sorted(levels, key=lambda level: level.Elevation)
+# Create a nested dictionary to hold the walls, grouped by level and function
+walls_by_level_and_function = defaultdict(lambda: defaultdict(list))
 
-# Group walls and rooms by level
-walls_by_level = {level.Name: [wall for wall in walls if wall.LevelId == level.Id] for level in levels}
-rooms_by_level = {level.Name: [room for room in rooms if room.LevelId == level.Id] for level in levels}
+# Collect all the walls in the project
+walls = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Walls).WhereElementIsNotElementType().ToElements()
+
+for wall in walls:
+    level = doc.GetElement(wall.LevelId).Name if wall.LevelId else 'No Level'
+    function = wall.WallType.Function
+    walls_by_level_and_function[level][str(function)].append(wall)
+
+# Print the results
+for level, walls_by_function in walls_by_level_and_function.items():
+    print("\nLevel: {}".format(level))
+    for function, walls in walls_by_function.items():
+        print("  Function: {}".format(function))
+        for wall in walls:
+            print("    Wall: {}".format(wall.Id.IntegerValue))
+
+# # Sort levels by elevation
+# levels = sorted(levels, key=lambda level: level.Elevation)
+
+# # Group walls and rooms by level
+# walls_by_level = {level.Name: [wall for wall in walls if wall.LevelId == level.Id] for level in levels}
+# rooms_by_level = {level.Name: [room for room in rooms if room.LevelId == level.Id] for level in levels}
+
+
+
+# # Print elements grouped by levels
+# for level in levels:
+    # wall_list = walls_by_level[level.Name]
+    # room_list = rooms_by_level[level.Name]
+    
+    # if wall_list or room_list:
+        # level_results = ["\nLevel: {}".format(level.Name)]
+    
+        # if wall_list:
+            # wall_results = ["\nWalls:"]
+            # for wall in wall_list:
+                # wall_results.append("{}: {}".format(wall.Name, wall.Id))
+            # level_results.extend(wall_results)
+        
+        # if room_list:
+            # room_results = ["\nRooms:"]
+            # for room in room_list:
+                # room_results.append("Room: {}".format(room.Number))
+            # level_results.extend(room_results)
+        
+        # results_by_level.append(level_results)
 
 # Initialize lists for storing results
 results_by_level = []
 property_line_results = []
-
-# Print elements grouped by levels
-for level in levels:
-    wall_list = walls_by_level[level.Name]
-    room_list = rooms_by_level[level.Name]
-    
-    if wall_list or room_list:
-        level_results = ["\nLevel: {}".format(level.Name)]
-    
-        if wall_list:
-            wall_results = ["\nWalls:"]
-            for wall in wall_list:
-                wall_results.append("{}: {}".format(wall.Name, wall.Id))
-            level_results.extend(wall_results)
-        
-        if room_list:
-            room_results = ["\nRooms:"]
-            for room in room_list:
-                room_results.append("Room: {}".format(room.Number))
-            level_results.extend(room_results)
-        
-        results_by_level.append(level_results)
 
 for property_line in property_lines:
     name = get_parameter_value_by_name(property_line, "Name")
@@ -124,23 +146,23 @@ else:
 # Print the list of area scheme names
 print("\nArea Schemes:")
 print(area_scheme_names)
-try:
-    # Test the functions
-    param_name = 'SpaceType'
-    boundaries = room_utils.merge_rooms_by_param(rooms, param_name)
+# try:
+    # # Test the functions
+    # param_name = 'SpaceType'
+    # boundaries = room_utils.merge_rooms_by_param(rooms, param_name)
     
-    # Create a new Area Boundary based on the exterior line
-    for boundary in boundaries:
-        print(boundary)
-        doc.Create.NewAreaBoundaryLine(current_view.SketchPlane, boundary, current_view)
-        num_lines_created += 1
+    # # Create a new Area Boundary based on the exterior line
+    # for boundary in boundaries:
+        # print(boundary)
+        # doc.Create.NewAreaBoundaryLine(current_view.SketchPlane, boundary, current_view)
+        # num_lines_created += 1
 
-except Exception as e:
-    logging.error("Exception occurred", exc_info=True)
-    t.RollBack()
-else:
-    t.Commit()
-    print("\nSuccess! Created {} Area Boundary Lines.".format(num_lines_created))
+# except Exception as e:
+    # logging.error("Exception occurred", exc_info=True)
+    # t.RollBack()
+# else:
+    # t.Commit()
+    # print("\nSuccess! Created {} Area Boundary Lines.".format(num_lines_created))
 
 
 

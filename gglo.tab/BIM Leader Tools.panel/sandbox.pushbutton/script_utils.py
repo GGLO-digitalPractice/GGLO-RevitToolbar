@@ -4,7 +4,7 @@ import math
 
 # Import Revit API
 clr.AddReference("RevitAPI")
-from Autodesk.Revit.DB import Category, Color, Transaction, CategoryType, DimensionType, GridType, LevelType, FilteredElementCollector, BuiltInCategory, BuiltInParameter, GraphicsStyleType
+from Autodesk.Revit.DB import Category, Color, Transaction, CategoryType, DimensionType, GridType, LevelType, FilteredElementCollector, TextNoteType, BuiltInCategory, BuiltInParameter, GraphicsStyleType
 
 def change_color_of_categories(doc, search_terms_colors):
     """
@@ -26,19 +26,29 @@ def change_color_of_categories(doc, search_terms_colors):
             gstyle = category.GetGraphicsStyle(GraphicsStyleType.Projection)
             if gstyle is not None:
                 gstyle.GraphicsStyleCategory.LineColor = color
+def get_text_note_name(text_note):
+    # Try getting the name from the SYMBOL_NAME_PARAM parameter
+    param = text_note.get_Parameter(BuiltInParameter.SYMBOL_NAME_PARAM)
+    if param:
+        return param.AsString()
+    return None
 
 def change_color_of_types(doc, color):
-    # Get all DimensionType, GridType, and LevelType elements in the document
+    # Get all DimensionType, GridType, LevelType, and TextNoteType elements in the document
     dimension_types = FilteredElementCollector(doc).OfClass(DimensionType).ToElements()
     grid_types = FilteredElementCollector(doc).OfClass(GridType).ToElements()
     level_types = FilteredElementCollector(doc).OfClass(LevelType).ToElements()
-
+    text_note_types = [
+        tnt for tnt in FilteredElementCollector(doc).OfClass(TextNoteType).ToElements()
+        if tnt and "working" not in get_text_note_name(tnt).lower() and "redline" not in get_text_note_name(tnt).lower()
+    ]   
     # Convert Color to integer value used in Revit
     int_color = CreateINTColor(color)
 
     all_types = []
     all_types.extend(dimension_types)
     all_types.extend(level_types)
+    all_types.extend(text_note_types)  # Add text note types to the list
 
     # Iterate over all types and set the LineColor to the provided color
     for element_type in all_types:
@@ -50,6 +60,7 @@ def change_color_of_types(doc, color):
         # Check if the type has 'GRID_END_SEGMENT_COLOR' parameter
         if grid_type.get_Parameter(BuiltInParameter.GRID_END_SEGMENT_COLOR) is not None:
             grid_type.get_Parameter(BuiltInParameter.GRID_END_SEGMENT_COLOR).Set(int_color)
+
 
 
 def CreateINTColor(color):

@@ -56,3 +56,22 @@ def merge_rooms_by_param(rooms, param_name):
         new_boundaries[param_val] = new_boundary
 
     return new_boundaries
+
+
+def get_rooms_by_level_and_space_type(doc):
+    # Create a nested dictionary to hold the rooms, grouped by level and SpaceType
+    rooms_by_level_and_space_type = defaultdict(lambda: defaultdict(list))
+
+    # Collect all the rooms in the project
+    rooms = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Rooms).WhereElementIsNotElementType().ToElements()
+
+    for room in rooms:
+        level = doc.GetElement(room.LevelId).Name if room.LevelId else 'No Level'
+
+        # Read the custom parameter called SpaceType
+        space_type_param = room.LookupParameter('SpaceType')
+        space_type = space_type_param.AsString() if space_type_param else 'No SpaceType'
+
+        rooms_by_level_and_space_type[level][space_type].append(room)
+
+    return rooms_by_level_and_space_type

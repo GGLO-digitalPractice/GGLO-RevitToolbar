@@ -1,0 +1,77 @@
+import clr
+clr.AddReference('System.Windows.Forms')
+clr.AddReference('System.Drawing')  # This is necessary for Point
+
+from System.Windows.Forms import Application, Form, Button, Label, DialogResult, FormStartPosition
+from System.Drawing import Point  # Add this line
+
+
+class CustomForm(Form):
+    def __init__(self):
+        self.Text = 'Modify Annotation properties:'
+        self.Width = 600
+        self.Height = 400
+        self.StartPosition = FormStartPosition.CenterScreen
+        
+        self.result_label = Label()
+        self.result_label.Text = "Result will appear here."
+        self.result_label.Width = 250
+        self.result_label.Location = Point(20, 20)
+        self.Controls.Add(self.result_label)
+        
+        self.btn1 = Button()
+        self.btn1.Text = "Run Function 1"
+        self.btn1.Location = Point(200, 60)
+        self.btn1.Click += self.run_function_1
+        self.Controls.Add(self.btn1)
+
+        self.btn2 = Button()
+        self.btn2.Text = "Run Function 2"
+        self.btn2.Location = Point(400, 60)
+        self.btn2.Click += self.run_function_2
+        self.Controls.Add(self.btn2)
+
+        self.ok_button = Button()
+        self.ok_button.Text = "OK"
+        self.ok_button.Location = Point(200, 120)
+        self.ok_button.Click += self.ok_clicked
+        self.Controls.Add(self.ok_button)
+
+        self.cancel_button = Button()
+        self.cancel_button.Text = "Cancel"
+        self.cancel_button.Location = Point(400, 120)
+        self.cancel_button.Click += self.cancel_clicked
+        self.Controls.Add(self.cancel_button)
+
+    def run_function_1(self, sender, event):
+        result = function_1()  # This is where you'd call your first function
+        self.result_label.Text = "Result from function 1: " + str(result)
+
+    def run_function_2(self, sender, event):
+        result = function_2()  # This is where you'd call your second function
+        self.result_label.Text = "Result from function 2: " + str(result)
+
+    def ok_clicked(self, sender, event):
+        self.DialogResult = DialogResult.OK
+        self.Close()
+
+    def cancel_clicked(self, sender, event):
+        self.DialogResult = DialogResult.Cancel
+        self.Close()
+
+def function_1():
+    # Your function's code here
+    return "Output from function 1"
+
+def function_2():
+    # Your function's code here
+    return "Output from function 2"
+
+form = CustomForm()
+result = form.ShowDialog()
+if result == DialogResult.OK:
+    # Continue with the rest of your script or whatever you want to happen after the user clicks OK
+    pass
+elif result == DialogResult.Cancel:
+    # Exit or cleanup, whatever you want to happen when the user clicks Cancel
+    pass

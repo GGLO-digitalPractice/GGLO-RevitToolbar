@@ -13,4 +13,4 @@ if msgUtils_muted():
 # icoFile = remPath + r'bin\Graphics\gglo.ico'
 
 # Display the message to the user
-forms.toast("Toolbar has been loaded!","GGLO Tools for Revit",appid="guRoo",actions={"GGLO Digital":"https://www.gglo.com"})
+forms.toast("Toolbar has been loaded!","GGLO Tools for Revit",appid="GGLO Tools",actions={"GGLO Digital":"https://www.gglo.com"})
