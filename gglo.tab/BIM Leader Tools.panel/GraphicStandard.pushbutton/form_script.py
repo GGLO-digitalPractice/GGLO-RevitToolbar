@@ -10,6 +10,7 @@ from System.Drawing import Point, Size, Color
 from pyrevit import forms
 
 # Import script utilities
+import annotation_utils
 import family_annotation_utils
 from family_annotation_utils import ask_for_font, test_selected_family
 

@@ -3,4 +3,5 @@ layout:
   - CopyKeynotes
   - ImportWalls
   - GroupWalls
+  - SetCoordinates
 title: Tools

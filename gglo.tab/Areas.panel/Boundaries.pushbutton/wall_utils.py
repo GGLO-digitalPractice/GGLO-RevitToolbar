@@ -10,7 +10,9 @@ from Autodesk.Revit.DB import (
     IntersectionResultArray,
     SetComparisonResult,
     XYZ,
-    Line)
+    Line,
+    Arc,
+    Ellipse)
 
 # Set up doc and uidoc variables
 doc = __revit__.ActiveUIDocument.Document
@@ -20,6 +22,7 @@ app = __revit__.Application
 # Define your functions here
 
 def get_wall_exterior_lines(wall_groups):
+    print("Entering get_wall_exterior_lines function...")
     exterior_lines = []
     
     for walls in wall_groups:
@@ -32,7 +35,36 @@ def get_wall_exterior_lines(wall_groups):
                 location_curve = wall.Location
                 if isinstance(location_curve, LocationCurve):
                     wall_width = wall_type.get_Parameter(BuiltInParameter.WALL_ATTR_WIDTH_PARAM).AsDouble()
-                    direction = location_curve.Curve.Direction
+                    wall_location = wall.Location
+                    if isinstance(wall_location, LocationCurve):
+                        wall_curve = wall_location.Curve
+                    else:
+                        print("Unexpected wall location type: {}".format(type(wall_location)))
+                        continue  # Skip this iteration and proceed to the next wall
+                    if isinstance(wall_curve, Line):
+                        # Handle linear walls
+                        direction = wall_curve.Direction
+
+                    elif isinstance(wall_curve, Arc):
+                        # Handle arced walls
+                        center_point = wall_curve.Center
+                        # For direction, you might want the tangent at the start or end, or another property.
+                        param = 0.5  # Example parameter, halfway along the arc
+                        #arc_point = wall_curve.Evaluate(param, True)  # True to normalize the parameter
+                        derivatives = wall_curve.ComputeDerivatives(param, True)  # True to normalize the parameter
+                        direction = derivatives.BasisX  # Tangent vector
+
+                    elif isinstance(wall_curve, Ellipse):
+                        # Handle elliptical walls
+                        center_point = wall_curve.Center
+                        # Similar to arcs, for direction, you might want the tangent at a specific point.
+                        param = 0.5  # Example parameter, halfway along the arc
+                        #ellipse_point = Ellipse.Evaluate(param, True, 0)  # True to normalize the parameter
+                        derivatives = Ellipse.ComputeDerivatives(param, True, 0)  # True to normalize the parameter
+                        direction = derivatives.BasisX  # Tangent vector
+                    else:
+                        print("Unsupported curve type: {}".format(type(wall_curve)))
+
                     normal = XYZ.BasisZ.CrossProduct(direction)
                     if wall.Flipped:
                         normal = -normal
@@ -40,7 +72,7 @@ def get_wall_exterior_lines(wall_groups):
                     end_point = location_curve.Curve.GetEndPoint(1) + normal * wall_width / 2
                     exterior_line = Line.CreateBound(start_point, end_point)
                     group_lines.append(exterior_line)
-
+        print("group_lines: {}".format(group_lines))
         # Adjust line endpoints
         for i in range(len(group_lines) - 1):
             current_line = group_lines[i]
@@ -63,7 +95,10 @@ def get_wall_exterior_lines(wall_groups):
                     group_lines[i+1] = next_line
         
         exterior_lines.append(group_lines)
-    
+    print("Exiting get_wall_exterior_lines function...")
+    print(
+        "exterior_lines: {}".format(exterior_lines)
+    )
     return exterior_lines
 
 def intersect(line1, line2):
@@ -73,6 +108,8 @@ def intersect(line1, line2):
         return results.Value[0].XYZPoint
     else:
         return None
+    # add print statements to all functions to see what is happening
+    print("line1: {}".format(line1))
 
 
         
@@ -86,7 +123,7 @@ def are_walls_connected(wall1, wall2):
             curve1.GetEndPoint(0).IsAlmostEqualTo(curve2.GetEndPoint(1)) or
             curve1.GetEndPoint(1).IsAlmostEqualTo(curve2.GetEndPoint(0)) or
             curve1.GetEndPoint(1).IsAlmostEqualTo(curve2.GetEndPoint(1)))
-
+    print("curve1: {}".format(curve1))
 
 def group_walls(walls):
     wall_groups = []
@@ -111,6 +148,7 @@ def group_walls(walls):
         wall_groups.append(current_group)
 
     return wall_groups
+    print("wall_groups: {}".format(wall_groups))
 
 def find_next_wall(current_wall, remaining_walls):
     for other_wall in remaining_walls:
@@ -161,7 +199,8 @@ def get_wall_compound_structure_location(wall):
         })
 
     return layer_locations
-    
+    print("layer_locations: {}".format(layer_locations))
+
 def get_wall_data(walls):
     # Initialize a dictionary to hold wall type data
     wall_type_data = {}
@@ -180,3 +219,4 @@ def get_wall_data(walls):
         wall_type_data[wall_type]['Element IDs'].append(wall.Id)
 
     return wall_type_data
+    print("wall_type_data: {}".format(wall_type_data))

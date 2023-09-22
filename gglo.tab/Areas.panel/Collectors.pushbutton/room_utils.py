@@ -75,3 +75,19 @@ def get_rooms_by_level_and_space_type(doc):
         rooms_by_level_and_space_type[level][space_type].append(room)
 
     return rooms_by_level_and_space_type
+
+def get_room_data(rooms_by_level_and_space_type):
+    room_data = []
+    rooms = rooms_by_level_and_space_type[level][space_type]
+    print(rooms)
+    for room in rooms:
+        room_name = room.LookupParameter('Name').AsString()
+        number = room.LookupParameter('Number').AsString()
+        area = room.Area
+
+        room_dict = {'Name':room_name, 'Number':number, 
+                    'Area':area}
+        
+        room_data.append(room_dict)
+    print(room_data)
+    return room_data

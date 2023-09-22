@@ -73,14 +73,19 @@ for area_scheme in area_schemes:
 
 # Create a nested dictionary to hold the walls, grouped by level and function
 walls_by_level_and_function = defaultdict(lambda: defaultdict(list))
+rooms_by_level_and_space_type = defaultdict(lambda: defaultdict(list))
 
-# Collect all the walls in the project
-walls = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Walls).WhereElementIsNotElementType().ToElements()
-
+# Group walls by level and function
 for wall in walls:
     level = doc.GetElement(wall.LevelId).Name if wall.LevelId else 'No Level'
     function = wall.WallType.Function
     walls_by_level_and_function[level][str(function)].append(wall)
+
+# Group rooms by level and SpaceType
+for room in rooms:
+    level = doc.GetElement(room.LevelId).Name if room.LevelId else 'No Level'
+    space_type = room.LookupParameter('SpaceType').AsString() if room.LookupParameter('SpaceType') else 'No SpaceType'
+    rooms_by_level_and_space_type[level][space_type].append(room)
 
 # Print the results
 for level, walls_by_function in walls_by_level_and_function.items():
@@ -90,39 +95,14 @@ for level, walls_by_function in walls_by_level_and_function.items():
         for wall in walls:
             print("    Wall: {}".format(wall.Id.IntegerValue))
 
-# # Sort levels by elevation
-# levels = sorted(levels, key=lambda level: level.Elevation)
+for level, rooms_by_space_type in rooms_by_level_and_space_type.items():
+    print("\nLevel: {}".format(level))
+    for space_type, rooms in rooms_by_space_type.items():
+        print("  Space Type: {}".format(space_type))
+        for room in rooms:
+            print("    Room: {}".format(room.Id.IntegerValue))
 
-# # Group walls and rooms by level
-# walls_by_level = {level.Name: [wall for wall in walls if wall.LevelId == level.Id] for level in levels}
-# rooms_by_level = {level.Name: [room for room in rooms if room.LevelId == level.Id] for level in levels}
-
-
-
-# # Print elements grouped by levels
-# for level in levels:
-    # wall_list = walls_by_level[level.Name]
-    # room_list = rooms_by_level[level.Name]
-    
-    # if wall_list or room_list:
-        # level_results = ["\nLevel: {}".format(level.Name)]
-    
-        # if wall_list:
-            # wall_results = ["\nWalls:"]
-            # for wall in wall_list:
-                # wall_results.append("{}: {}".format(wall.Name, wall.Id))
-            # level_results.extend(wall_results)
-        
-        # if room_list:
-            # room_results = ["\nRooms:"]
-            # for room in room_list:
-                # room_results.append("Room: {}".format(room.Number))
-            # level_results.extend(room_results)
-        
-        # results_by_level.append(level_results)
-
-# Initialize lists for storing results
-results_by_level = []
+# Create a list to store the results
 property_line_results = []
 
 for property_line in property_lines:
@@ -131,11 +111,7 @@ for property_line in property_lines:
     if name is not None and area is not None:
         property_line_results.append("Name: {}, Area: {}, ID: {}".format(name, area, property_line.Id))
 
-# Now the results are stored in the lists results_by_level and property_line_results
-# You can print them out, write to a file, etc.
-for result in results_by_level:
-    print('\n'.join(result))
-
+# Print the results
 if len(property_line_results) > 0:
     print("\nProperty Lines:")
     for result in property_line_results:
@@ -163,8 +139,3 @@ print(area_scheme_names)
 # else:
     # t.Commit()
     # print("\nSuccess! Created {} Area Boundary Lines.".format(num_lines_created))
-
-
-
-# merged_boundaries = room_utils.merge_rooms_by_param(rooms, "SpaceType")
-# print(merged_boundaries)
