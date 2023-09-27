@@ -1,21 +1,26 @@
-"""Enables standard procedure for setting shared coordinates"""
+"""Sets the coordinates of the project base point to the selected benchmark"""
 
 __title__ = 'Set Coordinates'
 __author__ = 'Sean Burke'
 
 import clr
 clr.AddReference('RevitAPI')
+clr.AddReference('RevitAPIUI')
 from Autodesk.Revit.DB import *
 from Autodesk.Revit.UI import *
+
+# Standard library imports
+from System.Collections.Generic import List
 from pyrevit import forms
 from pyrevit.forms import WPFWindow
 import logging
 
 # Get the current document and active view
 doc = __revit__.ActiveUIDocument.Document
-view = doc.ActiveView
+view = __revit__.ActiveUIDocument.ActiveView
 uidoc = __revit__.ActiveUIDocument
 
+# Prompt user for coordinates
 y = forms.ask_for_string(default="0", prompt="Enter North Coordinate") 
 x = forms.ask_for_string(default="0", prompt="Enter East Coordinate")
 z = forms.ask_for_string(default="0", prompt="Enter Height Elevation")
@@ -27,43 +32,13 @@ z = float(z)
 selected_benchmark = XYZ(x, y, z)
 
 print("Coordinates: {}".format(selected_benchmark))
-# Collect Survey points and change the clip state
-survey_point = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_SurveyBasePoint).ToElements()
+# Collect Survey points and change the clip state to unclipped
+survey_point = BasePoint.GetSurveyPoint(doc)
+print(survey_point)
 
+# Start a transaction
 t = Transaction(doc, 'Unclip Survey Points')
 t.Start()
-
-try:
-    for point in survey_point:
-        param = point.get_Parameter(BuiltInParameter.SURVEY_POINT_PROJECTED_ELEVATION)
-        param.Set(0)
-
-except Exception as e:
-    logging.error("Exception occurred", exc_info=True)
-    t.RollBack()
-else:
-    t.Commit()
-    print("\nSuccess! Created {} Area Boundary Lines.".format(num_lines_created))
-
-# class MyWindow(WPFWindow):
-#     def __init__(self, xaml_file_name):
-#         WPFWindow.__init__(self, xaml_file_name)
-        
-#         self.pick_button.Click += self.on_pick_clicked
-
-#     def on_pick_clicked(self, sender, args):
-#         from Autodesk.Revit.UI.Selection import ObjectSnapTypes
-        
-#         uidoc.PromptForFamilyInstancePlacement(ObjectSnapTypes.CoordinatesAtPoint)
-        
-#         if uidoc.SelectedReference: 
-#             selected_benchmark = uidoc.SelectedReference.GlobalPoint
-#             print(selected_benchmark)
-#             return selected_benchmark    
-#         self.close()
-
-# window = MyWindow('my_window.xaml') 
-# window.show_dialog()
 
 # Check if the active view is a plan view
 if view.ViewType == ViewType.FloorPlan:
