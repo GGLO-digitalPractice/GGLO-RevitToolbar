@@ -39,29 +39,6 @@ def prompt_for_boundary_type():
     )
     return selected_boundary
 
-# ... your existing code ...
-
-# Prompt user for boundary type
-selected_boundary_type = prompt_for_boundary_type()
-
-if not selected_boundary_type:
-    print("User cancelled or did not make a selection. Exiting script.")
-    # Optionally, exit the script here if needed
-else:
-    # Use the selected_boundary_type to determine location of lines
-    if selected_boundary_type == 'Gross':
-        # Set your logic for Gross
-        pass  # replace 'pass' with your actual logic/code
-    elif selected_boundary_type == 'FAR':
-        # Set your logic for FAR
-        pass  # replace 'pass' with your actual logic/code
-    elif selected_boundary_type == 'NSF':
-        # Set your logic for NSF
-        pass  # replace 'pass' with your actual logic/code
-
-    # ... rest of your script ...
-
-
 # Start the transaction
 t = Transaction(doc, 'Create area boundaries from walls')
 print("Starting Transaction...")
@@ -80,14 +57,31 @@ print(wall_groups)
 # Convert the list of wall ids to wall elements
 wall_groups_elements = [[doc.GetElement(ElementId(id)) for id in group] for group in wall_groups]
 print(wall_groups_elements)
+# Prompt user for boundary type
+selected_boundary_type = prompt_for_boundary_type()
+
+if not selected_boundary_type:
+    print("User cancelled or did not make a selection. Exiting script.")
+    # Optionally, exit the script here if needed
+else:
+    # Use the selected_boundary_type to determine location of lines
+    if selected_boundary_type == 'Gross':
+        # Set your logic for Gross
+        boundary_lines = wall_utils.get_wall_exterior_lines(wall_groups_elements)
+        print(boundary_lines)
+    elif selected_boundary_type == 'FAR':
+        # Set your logic for FAR
+        print("FAR definition not yet implemented.")
+    elif selected_boundary_type == 'NSF':
+        # Set your logic for NSF
+        print("NSF definition not yet implemented.")
 # Then pass the flattened list to your function
-exterior_lines = wall_utils.get_wall_exterior_lines(wall_groups_elements)
-print(exterior_lines)
+
 try:
     # Create a new Area Boundary based on the exterior line
-    for group_lines in exterior_lines:
-        for exterior_line in group_lines:
-            doc.Create.NewAreaBoundaryLine(current_view.SketchPlane, exterior_line, current_view)
+    for group_lines in boundary_lines:
+        for boundary_line in group_lines:
+            doc.Create.NewAreaBoundaryLine(current_view.SketchPlane, boundary_line, current_view)
             num_lines_created += 1
             print("Created line #{}".format(num_lines_created))
 except Exception as e:

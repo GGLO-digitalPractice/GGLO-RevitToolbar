@@ -1,3 +1,4 @@
+#! pyhthon3
 """Opens a Revit Model and enables user to select wall types to import"""
 
 __title__ = 'Import Walls'
@@ -16,7 +17,7 @@ from Autodesk.Revit.DB import *
 from System.Collections.Generic import List
 
 # Import pyRevit
-from pyrevit import revit, DB, forms
+from pyrevit import revit, DB, forms, script
 
 def open_document_in_background(document_path):
     # Convert the string path to a ModelPath
@@ -26,7 +27,7 @@ def open_document_in_background(document_path):
     open_options = DB.OpenOptions()
 
     # Open the document in the background
-    background_document = revit.doc.Application.OpenDocumentFile(model_path, open_options)
+    background_document = revit.Application.Application.OpenDocumentFile(model_path, open_options)
     
     return background_document
 
@@ -34,15 +35,15 @@ def import_wall_types(source_model_path):
     # Set up the transaction
     with revit.Transaction("Import Wall Types"):
         # Open the source model
-        source_model = revit.doc.Application.OpenDocumentFile(source_model_path)
+        source_model = revit.Application.Application.OpenDocumentFile(source_model_path)
         
         # Collect all wall types in the source model
         collector = FilteredElementCollector(source_model)
         wall_types = collector.OfClass(WallType).ToElements()
 
-        # Copy elements to current document
+        # Copy elements to the current document
         copied_elements = ElementTransformUtils.CopyElements(source_model, List[ElementId](wall_type.Id for wall_type in wall_types), revit.doc, None, None)
-        
+
 if __name__ == "__main__":
     # Show a dialog to the user to select a model
     model_path = forms.pick_file(file_ext='rvt')
@@ -58,3 +59,4 @@ if __name__ == "__main__":
         background_document.Close(False)
     else:
         forms.alert("No model selected.")
+
