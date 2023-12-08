@@ -9,3 +9,6 @@ title:
   en_us: Views UNIT Groups to Area Plans
 tooltip:
   en_us: Views UNIT Groups to Area Plans
+
+min_revit_version: 2023
+max_revit_version: 2023

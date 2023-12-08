@@ -9,3 +9,6 @@ title:
   en_us: Views Details On Sheet Not Referenced
 tooltip:
   en_us: Views Details On Sheet Not Referenced
+
+min_revit_version: 2024
+max_revit_version: 2024

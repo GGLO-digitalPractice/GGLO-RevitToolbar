@@ -9,3 +9,6 @@ title:
   en_us: Align Horizontal Curtain Grids to Levels
 tooltip:
   en_us: Align Horizontal Curtain Grids to Levels
+
+min_revit_version: 2024
+max_revit_version: 2024

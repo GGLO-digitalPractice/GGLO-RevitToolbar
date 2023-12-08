@@ -9,3 +9,6 @@ title:
   en_us: Query Fire Rating of Doors and Host Walls
 tooltip:
   en_us: Query Fire Rating of Doors and Host Walls
+
+min_revit_version: 2024
+max_revit_version: 2024

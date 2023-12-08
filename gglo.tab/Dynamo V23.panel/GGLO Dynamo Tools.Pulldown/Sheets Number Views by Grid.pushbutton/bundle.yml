@@ -9,3 +9,6 @@ title:
   en_us: Sheets Number Views by Grid
 tooltip:
   en_us: Sheets Number Views by Grid
+
+min_revit_version: 2023
+max_revit_version: 2023

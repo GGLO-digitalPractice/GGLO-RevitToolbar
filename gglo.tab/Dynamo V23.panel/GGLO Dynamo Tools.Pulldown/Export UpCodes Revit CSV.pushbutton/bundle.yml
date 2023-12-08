@@ -9,3 +9,6 @@ title:
   en_us: Export UpCodes Revit CSV
 tooltip:
   en_us: Export UpCodes Revit CSV
+
+min_revit_version: 2023
+max_revit_version: 2023

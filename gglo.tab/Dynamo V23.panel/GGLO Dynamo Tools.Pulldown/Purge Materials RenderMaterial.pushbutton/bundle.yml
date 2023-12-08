@@ -9,3 +9,6 @@ title:
   en_us: Purge Materials RenderMaterial
 tooltip:
   en_us: Purge Materials RenderMaterial
+
+min_revit_version: 2023
+max_revit_version: 2023

@@ -9,3 +9,6 @@ title:
   en_us: Views Duplicate and Rename Quad Parent Views
 tooltip:
   en_us: Views Duplicate and Rename Quad Parent Views
+
+min_revit_version: 2023
+max_revit_version: 2023

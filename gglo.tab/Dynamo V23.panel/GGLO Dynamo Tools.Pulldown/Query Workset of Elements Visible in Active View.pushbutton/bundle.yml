@@ -9,3 +9,6 @@ title:
   en_us: Query Workset of Elements Visible in Active View
 tooltip:
   en_us: Query Workset of Elements Visible in Active View
+
+min_revit_version: 2023
+max_revit_version: 2023

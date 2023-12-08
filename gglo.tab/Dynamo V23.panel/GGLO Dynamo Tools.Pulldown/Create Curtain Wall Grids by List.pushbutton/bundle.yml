@@ -9,3 +9,6 @@ title:
   en_us: Create Curtain Wall Grids by List
 tooltip:
   en_us: Create Curtain Wall Grids by List
+
+min_revit_version: 2023
+max_revit_version: 2023

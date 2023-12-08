@@ -9,3 +9,6 @@ title:
   en_us: Views Control Internal Origin Symbol Visibility
 tooltip:
   en_us: Views Control Internal Origin Symbol Visibility
+
+min_revit_version: 2023
+max_revit_version: 2023

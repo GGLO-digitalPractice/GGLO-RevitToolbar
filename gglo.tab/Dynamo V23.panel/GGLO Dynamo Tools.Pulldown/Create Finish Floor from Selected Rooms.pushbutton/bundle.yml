@@ -9,3 +9,6 @@ title:
   en_us: Create Finish Floor from Selected Rooms
 tooltip:
   en_us: Create Finish Floor from Selected Rooms
+
+min_revit_version: 2023
+max_revit_version: 2023

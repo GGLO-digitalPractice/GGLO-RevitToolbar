@@ -9,3 +9,6 @@ title:
   en_us: Purge Unused Room Separation Lines
 tooltip:
   en_us: Purge Unused Room Separation Lines
+
+min_revit_version: 2024
+max_revit_version: 2024

@@ -9,3 +9,6 @@ title:
   en_us: Create Levels by Offset
 tooltip:
   en_us: Create Levels by Offset
+
+min_revit_version: 2023
+max_revit_version: 2023

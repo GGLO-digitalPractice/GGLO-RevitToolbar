@@ -9,3 +9,6 @@ title:
   en_us: Create Horizontal Curtain Wall Grids per Level
 tooltip:
   en_us: Create Horizontal Curtain Wall Grids per Level
+
+min_revit_version: 2023
+max_revit_version: 2023

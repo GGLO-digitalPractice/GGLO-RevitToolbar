@@ -9,3 +9,6 @@ title:
   en_us: Copy Room Data to Area Data
 tooltip:
   en_us: Copy Room Data to Area Data
+
+min_revit_version: 2024
+max_revit_version: 2024

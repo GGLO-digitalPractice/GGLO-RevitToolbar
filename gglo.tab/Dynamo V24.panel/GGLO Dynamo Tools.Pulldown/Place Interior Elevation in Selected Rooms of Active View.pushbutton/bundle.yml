@@ -9,3 +9,6 @@ title:
   en_us: Place Interior Elevation in Selected Rooms of Active View
 tooltip:
   en_us: Place Interior Elevation in Selected Rooms of Active View
+
+min_revit_version: 2024
+max_revit_version: 2024
