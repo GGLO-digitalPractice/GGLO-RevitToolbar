@@ -1,0 +1,14 @@
+engine:
+  clean: false
+  automate: false
+  dynamo_path: String
+  dynamo_path_check_existing: Boolean
+  dynamo_force_manual_run: Boolean
+  dynamo_model_nodes_info: String
+title:
+  en_us: Views Duplicate and Rename Quad Parent Views
+tooltip:
+  en_us: Views Duplicate and Rename Quad Parent Views
+
+min_revit_version: 2024
+max_revit_version: 2024
