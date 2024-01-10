@@ -85,3 +85,7 @@ if selected_groups:
     folder_path = forms.pick_folder()
     if folder_path:
         save_groups_as_rvt(selected_groups, folder_path)
+
+# Need to look into checking file's Project Info parameters, to add the Client Abbreviation 
+# and Project Name with White Space removed, add that to the group name for path to saveas
+# this initial testing was in the Test-ML.rvt file so the unit groups were already named
