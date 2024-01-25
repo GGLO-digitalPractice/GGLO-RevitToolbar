@@ -1,8 +1,8 @@
 layout:
   - Preselect_byCategory
-  - CopyKeynotes
-  - ImportWalls
-  - GroupWalls
-  - SetCoordinates
+  # - CopyKeynotes
+  # - ImportWalls
+  # - GroupWalls
+  # - SetCoordinates
   - UnitGroupPull
 title: Tools
