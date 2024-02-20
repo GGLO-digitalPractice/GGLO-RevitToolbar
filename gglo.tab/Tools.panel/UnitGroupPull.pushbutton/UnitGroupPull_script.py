@@ -15,7 +15,9 @@ app = uiapp.Application
 # select model groups
 def select_model_groups():
     # Get all model groups
-    # if we want all groups in the project, including those not placed we need to change to GroupType in .OfClass(GroupType)
+    # ***if we want all groups in the project, including those not placed***
+    # ***we need to change to GroupType in .OfClass(GroupType)***
+    # all_groups = DB.FilteredElementCollector(revit.doc).OfClass(DB.GroupType).ToElements()
     all_groups = DB.FilteredElementCollector(revit.doc).OfClass(DB.Group).ToElements()
     # Display in a selectable list
     selected_groups = forms.SelectFromList.show([g.Name for g in all_groups], multiselect=True)
@@ -30,15 +32,17 @@ def set_project_info():
         pi_client_name = project_info.ClientName
 
     if pi_client_name == None or pi_client_name == "ENTER CLIENT NAME":
-        client_name = forms.ask_for_unique_string("Please provide Client Abbreviation", title = "Client Abbreviation")
+        client_name = forms.ask_for_unique_string("Please provide Client Abbreviation", default = str(pi_client_name), title = "Client Abbreviation")
     else:
         client_name = forms.ask_for_unique_string("Accept or Correct Client Abbreviation", default = str(pi_client_name), title = "Accept or Correct Client Abbreviation")
     if pi_proj_name == None or pi_proj_name == "PROJECT NAME":
-        proj_name = forms.ask_for_unique_string("Please provide Project Name", title = "Project Name")
+        proj_name = forms.ask_for_unique_string("Please provide Project Name", default = str(pi_proj_name), title = "Project Name")
     else:
         proj_name = forms.ask_for_unique_string("Accept or Correct Project Name", default = str(pi_proj_name), title = "Accept or Correct Project Name")
     path_prefix = client_name.replace(" ", "") + "_" + proj_name.replace(" ", "") + "_"
     return path_prefix
+
+# *** Need to find a specific location for where this file lives for the
 
 UnitGroupSrc = "H:/Grasshopper/04 - RhinoInsideTools/_WIP/07_Unit Groups to Rhino\UnitGroup.rvt"
 # Eventually will want to set a specific output folder, possibly note that and show to the user for confirmation purposes
@@ -59,6 +63,7 @@ def save_groups_as_rvt(selected_groups, folder_path, path_prefix):
         # Create a new Revit document
         # ui_doc = uiapp.OpenAndActivateDocument(UnitGroupSrc)
         new_doc = uiapp.OpenAndActivateDocument(UnitGroupSrc).Document
+        old_doc = new_doc
 
         # Start a transaction to modify the new document
         with DB.Transaction(new_doc, 'Copy Group') as trans:
@@ -89,6 +94,7 @@ def save_groups_as_rvt(selected_groups, folder_path, path_prefix):
         # Close the new document
         if new_doc.IsModifiable:
             new_doc.Close(False)
+            old_doc.Close(False)
 
 # Select Folder Path
 # will only need this for testing
@@ -109,7 +115,3 @@ if selected_groups:
     folder_path = forms.pick_folder()
     if folder_path:
         save_groups_as_rvt(selected_groups, folder_path, path_prefix)
-
-# Need to look into checking file's Project Info parameters, to add the Client Abbreviation 
-# and Project Name with White Space removed, add that to the group name for path to saveas
-# this initial testing was in the Test-ML.rvt file so the unit groups were already named
