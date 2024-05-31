@@ -66,8 +66,11 @@ def get_active_view_name():
     active_view = uidoc.ActiveGraphicalView
     return active_view.Name
 
-def get_file_size(file_path):
-    return os.path.getsize(file_path) / (1024 ** 2)  # in MB
+# def get_file_size(file_path):
+#     try:
+#         return os.path.getsize(file_path) / (1024 ** 2)  # in MB
+#     except OSError as e:
+#         return "Error: {0}".format(e)
 
 def get_c_drive_usage():
     searcher = ManagementObjectSearcher("SELECT Size, FreeSpace FROM Win32_LogicalDisk WHERE DeviceID='C:'")
@@ -84,8 +87,8 @@ def create_support_ticket_email(data):
     body = (
         "\n"
         "\n"
-        "Team Member, please fill out your issue / need for sending a ticket above.\n"
-        "----------------------------------------------\n"
+        "Team member to add description of ticket reason / issue above this line\n"
+        "------------------------------------------------------------------------------\n"
         "Computer Name: {computer_name}\n"
         "User Name: {user_name}\n"
         "Autodesk ID: {autodesk_id}\n"
@@ -99,7 +102,7 @@ def create_support_ticket_email(data):
         "Free Memory: {free_memory} GB\n"
         "Revit Local Model File Path: {local_model_path}\n"
         "Revit Central Model File Path: {central_model_path}\n"
-        "Local Model File Size: {local_model_size} MB\n"
+        #"Local Model File Size: {local_model_size} MB\n"
         "C Drive Usage: {c_drive_usage}%\n"
     ).format(
         computer_name=data["computer_name"],
@@ -115,7 +118,7 @@ def create_support_ticket_email(data):
         free_memory=data["free_memory"],
         local_model_path=data["local_model_path"],
         central_model_path=data["central_model_path"],
-        local_model_size=data["local_model_size"],
+        #local_model_size=data["local_model_size"],
         c_drive_usage=data["c_drive_usage"]
     )
     
@@ -133,7 +136,7 @@ def main():
     active_view_name = get_active_view_name()
     revit_version, revit_build = get_revit_version_info()
     total_memory, free_memory = get_memory_usage()
-    local_model_size = "{:.2f}".format(float(get_file_size(project_file_path)))  # format as float
+    #local_model_size = get_file_size(project_file_path)  # in MB
     c_drive_usage = "{:.2f}".format(float(get_c_drive_usage()))  # format as float
 
     data = {
@@ -150,7 +153,7 @@ def main():
         "free_memory": "{:.2f}".format(free_memory),  # format as float
         "local_model_path": project_file_path,
         "central_model_path": central_model_path,
-        "local_model_size": local_model_size,
+        #"local_model_size": local_model_size,
         "c_drive_usage": c_drive_usage
     }
 
