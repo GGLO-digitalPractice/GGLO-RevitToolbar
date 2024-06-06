@@ -87,8 +87,8 @@ def create_support_ticket_email(data):
     body = (
         "\n"
         "\n"
-        "Team member to add description of ticket reason / issue above this line\n"
-        "------------------------------------------------------------------------------\n"
+        "Team Member, please fill out your issue / need for sending a ticket above.\n"
+        "----------------------------------------------\n"
         "Computer Name: {computer_name}\n"
         "User Name: {user_name}\n"
         "Autodesk ID: {autodesk_id}\n"
