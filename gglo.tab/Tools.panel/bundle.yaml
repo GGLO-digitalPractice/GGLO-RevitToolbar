@@ -1,8 +1,9 @@
 layout:
   - Preselect_byCategory
+  - UnitGroupPull
+  - ImportWalls
 
   # - CopyKeynotes
-  # - ImportWalls
   # - GroupWalls
   # - SetCoordinates
 
